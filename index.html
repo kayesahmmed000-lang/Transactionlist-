@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -128,18 +128,27 @@ thead th {
             justify-content: center;
             transition: transform 0.3s ease-in-out; 
         }
+        
+        
         #row-2-content,
         #row-3-content,
-         #row-4-content {
+        #row-4-content,
+        #row-2-bill,        /* <-- এই লাইন যোগ করা হয়েছে */
+        #row-2-remaining   /* <-- এই লাইন যোগ করা হয়েছে */
+         {
             display: none; 
         }
         #row-2-content.active,
         #row-3-content.active,
-        #row-4-content.active {
+        #row-4-content.active,
+        #row-2-bill.active,       /* <-- এই লাইন যোগ করা হয়েছে */
+        #row-2-remaining.active  /* <-- এই লাইন যোগ করা হয়েছে */
+        {
             display: table-row; 
             background-color: #f9f9f9; 
             border-top: 2px solid #1abc9c; 
         }
+        
 
         /* সক্রিয় হলে আইকন উল্টে যাবে */
         .accordion-row-header.active .icon-symbol {
@@ -180,7 +189,7 @@ thead th {
                 </tr>
                 <tr class="data-cell-center">
                     <th>কায়েস</th><th>উৎস</th><th>আরাফাত</th><th>জয়</th><th>রোহিত</th>
-                    <th>আবিদ</th><th>খবির</th><th>অন্যান্য1</th>
+                    <th>আবিদ</th><th>খবির</th><th>অন্যান্য</th>
                 </tr>
             </thead>
             <tbody>
@@ -191,7 +200,7 @@ thead th {
                     <td>২০</td><td>২০</td><td>২০</td><td>২০</td><td>২০</td>
                     <td>০</td><td>০</td><td>২০</td>
                     <td rowspan="1" style="vertical-align: top;">০</td>
-                    <td rowspan ="3" style="vertical-align:top; font-weight: 100;">১২০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
+                    <td rowspan ="3" style="vertical-align:top; font-weight: 600;">১২০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
                 </tr>
                 <tr class="data-cell-center">
                     <td class="data-cell-center" style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
@@ -218,16 +227,29 @@ thead th {
                     </td>
                 </tr>
                 
+                
+                
                 <tr id="row-2-content" class="data-cell-center">
-                    <td>২</td>
-                    <td>০৮/১১/২৫</td>
-                    <td style="font-weight: 600;color: #16a085;">জমা</td>
+                    <td rowspan="3">২</td> <td rowspan="3">০৮/১১/২৫</td> <td style="font-weight: 600;color: #16a085;">জমা</td>
                     <td>২০</td><td>২০</td><td>২০</td><td></td><td>২০</td>
                     <td></td><td></td><td></td>
                     <td></td>
                     <td style="font-weight: 600;">৮০</td>
                 </tr>
+                
+                <tr id="row-2-bill" class="data-cell-center">
+                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
+                    <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
+                </tr>
 
+                <tr id="row-2-remaining" class="data-cell-center">
+                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
+                    <td colspan="9"></td> <td style="font-weight: 900;">৮০+৫<br>=৮৫</td>
+                </tr>
+                
+                
+           
+                
                 <tr class="accordion-row-header" id="toggle-row-3">
                     <td colspan="13">
                         <span class="accordion-icon-container">
@@ -264,7 +286,7 @@ thead th {
                 
                 <tr id="row-4-content" class="data-cell-center">
                     <td>৩</td>
-                    <td>০৯/১১/২৫</td>
+                    <td>১০/১১/২৫</td>
                     <td style="font-weight: 600;color: #16a085;">জমা</td>
                     <td></td>
                     <td></td>
@@ -316,21 +338,23 @@ thead th {
     }
     
    
+    
     document.addEventListener('DOMContentLoaded', () => {
         applyAnimationToText('club-name-to-animate'); 
         
-        // অ্যাকর্ডিয়ন পেয়ারগুলো ডিফাইন করা হলো: [টগল রো ID, কনটেন্ট রো ID]
-        const accordionPairs = [
-            ['toggle-row-2', 'row-2-content'], 
-            ['toggle-row-3', 'row-3-content']  
-        ,['toggle-row-4', 'row-4-content']  
+        // অ্যাকর্ডিয়ন গ্রুপগুলো ডিফাইন করা হলো: [টগল রো ID, [কনটেন্ট রো ID-গুলো] ]
+        const accordionGroups = [
+            // ২ নম্বর আইটেমটি এখন একটি গ্রুপ, যার ভেতরে ৩টি সারি আছে
+            ['toggle-row-2', ['row-2-content', 'row-2-bill', 'row-2-remaining']], 
+            ['toggle-row-3', ['row-3-content']], // এটি একটি সারির গ্রুপ
+            ['toggle-row-4', ['row-4-content']]  // এটিও একটি সারির গ্রুপ
         ];
 
-        accordionPairs.forEach(pair => {
-            const toggleRow = document.getElementById(pair[0]);
-            const contentRow = document.getElementById(pair[1]);
+        accordionGroups.forEach(group => {
+            const toggleRow = document.getElementById(group[0]);
+            const contentRowIds = group[1]; // contentRowIds এখন একটি অ্যারে
 
-            if (toggleRow && contentRow) {
+            if (toggleRow && contentRowIds.length > 0) {
                 toggleRow.addEventListener('click', function() {
                     
                    
@@ -338,10 +362,16 @@ thead th {
                     setTimeout(() => {
                         this.classList.remove('spinning');
                     }, 600);
-
                  
                     this.classList.toggle('active');
-                    contentRow.classList.toggle('active');
+                    
+                    // গ্রুপের ভেতরের প্রতিটি ID ধরে টগল করা হচ্ছে
+                    contentRowIds.forEach(rowId => {
+                        const contentRow = document.getElementById(rowId);
+                        if (contentRow) {
+                            contentRow.classList.toggle('active');
+                        }
+                    });
                 });
             }
         });
