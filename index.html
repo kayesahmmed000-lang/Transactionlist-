@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@ body   {
             box-shadow: 0 10px 30px rgba(0,   0, 0, 0.1);
             overflow: hidden;
             border: none;
-            margin-bottom: 20px; /* নিচের টেক্সটের জন্য কিছুটা জায়গা তৈরি করা হলো */
+            margin-bottom: 20px; /* নিচের টেক্সটের জন্য কিছুটা জায়গা তৈরি করা হলো */
        }
        
        
@@ -129,20 +129,32 @@ thead th {
             transition: transform 0.3s ease-in-out; 
         }
         
-        
+        /* #row-4-deposit, #row-4-bill, #row-4-remaining নতুন যোগ করা হয়েছে */
         #row-2-content,
         #row-3-content,
         #row-4-content,
-        #row-2-bill,        /* <-- এই লাইন যোগ করা হয়েছে */
-        #row-2-remaining   /* <-- এই লাইন যোগ করা হয়েছে */
+        #row-2-bill,        
+        #row-2-remaining, 
+        #row-3-bill,        
+        #row-3-remaining, 
+        #row-4-deposit,   
+        #row-4-bill,      
+        #row-4-remaining 
          {
             display: none; 
         }
+        
+        /* #row-4-deposit.active, #row-4-bill.active, #row-4-remaining.active নতুন যোগ করা হয়েছে */
         #row-2-content.active,
         #row-3-content.active,
         #row-4-content.active,
-        #row-2-bill.active,       /* <-- এই লাইন যোগ করা হয়েছে */
-        #row-2-remaining.active  /* <-- এই লাইন যোগ করা হয়েছে */
+        #row-2-bill.active,       
+        #row-2-remaining.active,
+        #row-3-bill.active,       
+        #row-3-remaining.active,
+        #row-4-deposit.active,   
+        #row-4-bill.active,      
+        #row-4-remaining.active 
         {
             display: table-row; 
             background-color: #f9f9f9; 
@@ -189,7 +201,7 @@ thead th {
                 </tr>
                 <tr class="data-cell-center">
                     <th>কায়েস</th><th>উৎস</th><th>আরাফাত</th><th>জয়</th><th>রোহিত</th>
-                    <th>আবিদ</th><th>খবির</th><th>অন্যান্য</th>
+                    <th>হাবিব</th><th>খবির</th><th>অন্যান্য</th>
                 </tr>
             </thead>
             <tbody>
@@ -198,9 +210,9 @@ thead th {
                     <td rowspan="4">৭/১১/২৫</td>
                     <td class="data-cell-center" style="font-weight: 700;color: #16a085;">জমা </td>
                     <td>২০</td><td>২০</td><td>২০</td><td>২০</td><td>২০</td>
-                    <td>০</td><td>০</td><td>২০</td>
+                    <td>২০</td><td>০</td><td>২০</td>
                     <td rowspan="1" style="vertical-align: top;">০</td>
-                    <td rowspan ="3" style="vertical-align:top; font-weight: 600;">১২০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
+                    <td rowspan ="3" style="vertical-align:top; font-weight: 600;">১৪০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
                 </tr>
                 <tr class="data-cell-center">
                     <td class="data-cell-center" style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
@@ -215,7 +227,7 @@ thead th {
                 <tr class="data-cell-center">
                     <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
                     <td colspan="9"></td>
-                    <td style="font-weight: 700;">৫</td>
+                    <td style="font-weight: 700;">২৫</td>
                     
                 </tr>
 
@@ -244,7 +256,7 @@ thead th {
 
                 <tr id="row-2-remaining" class="data-cell-center">
                     <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
-                    <td colspan="9"></td> <td style="font-weight: 900;">৫৫+৫<br>=৬০</td>
+                    <td colspan="9"></td> <td style="font-weight: 900;">৫৫+২৫<br>=৮০</td>
                 </tr>
                 
                 
@@ -258,23 +270,37 @@ thead th {
                     </td>
                 </tr>
                 
+                        
+                        
                 <tr id="row-3-content" class="data-cell-center">
-                    <td>৩</td>
-                    <td>০৯/১১/২৫</td>
+                    <td rowspan="3">৩</td>
+                    <td rowspan="3">১০/১১/২৫</td>
                     <td style="font-weight: 600;color: #16a085;">জমা</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>২০</td>
+                    <td>২০</td>
+                    <td>২০</td>
+                    <td>২০</td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     
-                    <td style="font-weight: 600;">০</td>
+                    <td style="font-weight: 600;">৮০</td>
                 </tr>
                 
+                        
+                        <tr id="row-3-bill" class="data-cell-center">
+                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
+                    <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
+                </tr>
+
+                <tr id="row-3-remaining" class="data-cell-center">
+                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
+                    <td colspan="9"></td> <td style="font-weight: 900;">৮০+৮০<br>=১৬০</td>
+                </tr>
+                        
+                        
                 
                 <tr class="accordion-row-header" id="toggle-row-4">
                     <td colspan="13">
@@ -284,24 +310,24 @@ thead th {
                     </td>
                 </tr>
                 
-                <tr id="row-4-content" class="data-cell-center">
-                    <td>৪</td>
-                    <td>১০/১১/২৫</td>
-                    <td style="font-weight: 600;color: #16a085;">জমা</td>
+                <tr id="row-4-deposit" class="data-cell-center">
+                    <td rowspan="3">৪</td> <td rowspan="3">১১/১১/২৫</td> <td style="font-weight: 600;color: #16a085;">জমা</td>
+                    <td></td><td></td><td></td><td></td><td></td>
+                    <td></td><td></td><td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
                     <td style="font-weight: 600;">০</td>
                 </tr>
+                
+                <tr id="row-4-bill" class="data-cell-center">
+                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
+                    <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
+                </tr>
 
-            </tbody>
+                <tr id="row-4-remaining" class="data-cell-center">
+                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
+                    <td colspan="9"></td> <td style="font-weight: 900;">০</td> 
+                </tr>
+                </tbody>
         </table>
     </div> 
     
@@ -344,10 +370,12 @@ thead th {
         
         // অ্যাকর্ডিয়ন গ্রুপগুলো ডিফাইন করা হলো: [টগল রো ID, [কনটেন্ট রো ID-গুলো] ]
         const accordionGroups = [
-            // ২ নম্বর আইটেমটি এখন একটি গ্রুপ, যার ভেতরে ৩টি সারি আছে
+            // ২ নম্বর আইটেম
             ['toggle-row-2', ['row-2-content', 'row-2-bill', 'row-2-remaining']], 
-            ['toggle-row-3', ['row-3-content']], // এটি একটি সারির গ্রুপ
-            ['toggle-row-4', ['row-4-content']]  // এটিও একটি সারির গ্রুপ
+            // ৩ নম্বর আইটেম
+            ['toggle-row-3', ['row-3-content', 'row-3-bill', 'row-3-remaining']], 
+            // ৪ নম্বর আইটেমটিকে নতুন ৩টি সারির গ্রুপ বানানো হলো
+            ['toggle-row-4', ['row-4-deposit', 'row-4-bill', 'row-4-remaining']] 
         ];
 
         accordionGroups.forEach(group => {
@@ -366,6 +394,7 @@ thead th {
                     this.classList.toggle('active');
                     
                     // গ্রুপের ভেতরের প্রতিটি ID ধরে টগল করা হচ্ছে
+
                     contentRowIds.forEach(rowId => {
                         const contentRow = document.getElementById(rowId);
                         if (contentRow) {
@@ -379,4 +408,4 @@ thead th {
 </script>
 
 </body>
-</html>
+                            </html>
