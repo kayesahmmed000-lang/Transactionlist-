@@ -1,411 +1,525 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <title>DYNAMIX Badminton SPORTS CLUB 🏸
-    </title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-body   {
-            font-family: 'Poppins';  
-            sans-serif; 
-            background-color: #f0f3f6; 
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column; /* নতুন টেক্সট যোগ করার জন্য কলাম ডিসপ্লে যোগ করা হলো */
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
-       }
-.table-container {
-            width: 90%; 
-            max-width: 1000px; 
-            background-color: #ffffff;
-            border-radius: 18px; 
-            box-shadow: 0 10px 30px rgba(0,   0, 0, 0.1);
-            overflow: hidden;
-            border: none;
-            margin-bottom: 20px; /* নিচের টেক্সটের জন্য কিছুটা জায়গা তৈরি করা হলো */
-       }
-       
-       
-      
+  <meta charset="UTF-8">
+  <title>DYNAMIX Badminton SPORTS CLUB 🏸</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif; 
+      background-color: #f0f3f6; 
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      min-height: 100vh; 
+      overflow-x: auto; 
+    }
 
+    .table-wrapper {
+      width: 90%;
+      max-width: 1000px;
+      overflow-y: visible;
+      position: relative;
+      padding-top: 40px;
+      padding-bottom: 150px; 
+    }
 
-/* নতুন CSS: টেবিলের নিচে Creators' Credit এর জন্য */
-.creator-credit {
-            text-align: center;
-            font-size: 14px;
-            color: #7f8c8d; /* হালকা ধূসর রঙ */
-            margin-top: 10px;
-            margin-bottom: 20px;
-            font-weight: 400;
-        }
+    .table-container {
+      background-color: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: none;
+      transform-origin: left top; 
+      transition: transform 0.3s ease;
+      width: 100%;
+      min-width: 800px;
+    }
 
-table  {
-            width: 100%; 
-            border-collapse: collapse;
-            color: #2c3e50; 
-       }
-th, td {
-            border: 1px solid #e6e6e6; 
-            padding: 14px 10px; 
-            font-size: 15px;
-            font-weight: 400;
-        }
-caption {
-            padding-bottom: 25px;
-            padding-top: 20px;
-            background: #ffffff;
-            border-bottom: 1px solid #e6e6e6;
-            
-        }
-caption h1 {
-            font-size: 34px; 
-            font-weight: 900; 
-            letter-spacing: 2px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-            margin-top: 10px;
-             
-         }
+    /* Created by Kayes Ahmmed লেখার ডিফল্ট স্টাইল (টেবিলের নিচে) */
+    .creator-credit {
+      text-align: center;
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-weight: 400;
+      transition: all 0.3s ease;
+    }
 
-thead tr {
-            background-color: #1abc9c;
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-thead th {
-            border-color: #16a085;
-        }
-#club-name-to-animate span {
-            display: inline-block;
-            transition: color 0.4s ease-in-out, transform 0.2s;
-            font-weight: 900;
-        }
-@keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-.accordion-row-header {
-            cursor: pointer;
-            background-color: #ecf0f1; 
-            height: 40px; 
-            transition: background-color 0.2s;
-        }
-        .accordion-row-header:hover {
-            background-color: #dce1e5;
-        }
-        .accordion-row-header td {
-             border: none;
-             padding: 0;
-             text-align: left;
-             vertical-align: middle;
-        }
-.accordion-icon-container {
-            background-color: #4CAF50; 
-            padding: 7px; 
-            border-radius: 8px; 
-            display: inline-block;
-            margin-left: 15px; 
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s ease-out; 
-        }
-        .accordion-icon-container:hover {
-            transform: scale(1.1); 
-        }
+    /* ✅ Zoom করার সময় Created by Kayes Ahmmed লেখাটির ফিক্সড স্টাইল (বক্স/ব্যাকগ্রাউন্ড সরানো হয়েছে) */
+    .fixed-credit {
+        position: fixed;
+        bottom: 50px; 
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        /* ✅ নিচে থেকে বক্স/ব্যাকগ্রাউন্ড সরিয়ে শুধু ফিক্সড পজিশন রাখা হলো */
+        background: none; 
+        padding: 0; 
+        box-shadow: none; 
+        /* ফিক্সড হবার পর ফন্টের রঙ ডিফল্ট গ্রে থেকে সাদা হয়ে যাবে, যা পরে জাভাস্ক্রিপ্ট দ্বারা পরিবর্তন করা হবে */
+        color: #7f8c8d; 
+    }
+    
+    /* জুমড অবস্থায় ফিক্সড ক্রেডিটের ভেতরের স্প্যানগুলো */
+    .fixed-credit span {
+        transition: color 0.4s ease-in-out;
+        font-weight: 600; /* ফন্ট ওয়েট সামান্য বাড়ানো হলো */
+    }
+    /* ------------------------------------------------ */
 
-        .icon-symbol {
-            background-color: #ff9800; 
-            color: white; 
-            width: 22px; 
-            height: 22px; 
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease-in-out; 
-        }
-        
-        /* #row-4-deposit, #row-4-bill, #row-4-remaining নতুন যোগ করা হয়েছে */
-        #row-2-content,
-        #row-3-content,
-        #row-4-content,
-        #row-2-bill,        
-        #row-2-remaining, 
-        #row-3-bill,        
-        #row-3-remaining, 
-        #row-4-deposit,   
-        #row-4-bill,      
-        #row-4-remaining 
-         {
-            display: none; 
-        }
-        
-        /* #row-4-deposit.active, #row-4-bill.active, #row-4-remaining.active নতুন যোগ করা হয়েছে */
-        #row-2-content.active,
-        #row-3-content.active,
-        #row-4-content.active,
-        #row-2-bill.active,       
-        #row-2-remaining.active,
-        #row-3-bill.active,       
-        #row-3-remaining.active,
-        #row-4-deposit.active,   
-        #row-4-bill.active,      
-        #row-4-remaining.active 
-        {
-            display: table-row; 
-            background-color: #f9f9f9; 
-            border-top: 2px solid #1abc9c; 
-        }
-        
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #2c3e50;
+    }
 
-        /* সক্রিয় হলে আইকন উল্টে যাবে */
-        .accordion-row-header.active .icon-symbol {
-            transform: rotate(180deg);
-        }
-        .accordion-row-header.spinning .icon-symbol {
-            animation: spin 0.6s linear; 
-        }
-        .data-cell-center {
-            text-align: center;
-        }
-        .data-cell-left {
-            text-align: left;
-        }
-    </style>
+    th, td {
+      border: 1px solid #e6e6e6;
+      padding: 14px 10px;
+      font-size: 15px;
+      font-weight: 400;
+    }
+
+    caption {
+      padding-bottom: 25px;
+      padding-top: 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #e6e6e6;
+      position: relative;
+    }
+
+    caption h1 {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+      margin-top: 10px;
+    }
+
+    thead tr {
+      background-color: #1abc9c;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    thead th {
+      border-color: #16a085;
+    }
+
+    #club-name-to-animate span {
+      display: inline-block;
+      transition: color 0.4s ease-in-out, transform 0.2s;
+      font-weight: 900;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .accordion-row-header {
+      cursor: pointer;
+      background-color: #ecf0f1;
+      height: 40px;
+      transition: background-color 0.2s;
+    }
+
+    .accordion-row-header:hover {
+      background-color: #dce1e5;
+    }
+
+    .accordion-row-header td {
+      border: none;
+      padding: 0;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    .accordion-icon-container {
+      background-color: #4CAF50;
+      padding: 7px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-left: 15px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease-out;
+    }
+
+    .accordion-icon-container:hover {
+      transform: scale(1.1);
+    }
+
+    .icon-symbol {
+      background-color: #ff9800;
+      color: white;
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #row-2-content, #row-3-content, #row-4-content,
+    #row-2-bill, #row-2-remaining,
+    #row-3-bill, #row-3-remaining,
+    #row-4-deposit, #row-4-bill, #row-4-remaining {
+      display: none;
+    }
+
+    #row-2-content.active, #row-3-content.active, #row-4-content.active,
+    #row-2-bill.active, #row-2-remaining.active,
+    #row-3-bill.active, #row-3-remaining.active,
+    #row-4-deposit.active, #row-4-bill.active, #row-4-remaining.active {
+      display: table-row;
+      background-color: #f9f9f9;
+      border-top: 2px solid #1abc9c;
+    }
+
+    .accordion-row-header.active .icon-symbol {
+      transform: rotate(180deg);
+    }
+
+    .accordion-row-header.spinning .icon-symbol {
+      animation: spin 0.6s linear;
+    }
+
+    .data-cell-center {
+      text-align: center;
+    }
+
+    .data-cell-left {
+      text-align: left;
+    }
+
+    /* Zoom Button Styles */
+    .zoom-buttons {
+      position: fixed; 
+      bottom: 40px; 
+      right: 30px;
+      z-index: 999; 
+      display: flex;
+      flex-direction: column; 
+      gap: 12px; 
+    }
+
+    .zoom-btn {
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      padding: 14px 22px; 
+      font-size: 16px; 
+      font-weight: 700; 
+      border-radius: 10px; 
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, background-color 0.2s;
+      width: 160px; 
+      text-align: center;
+    }
+
+    .zoom-btn:hover {
+      transform: scale(1.05); 
+      background-color: #16a085;
+    }
+    
+    #zoom-reset {
+        background-color: #e74c3c; 
+    }
+    #zoom-reset:hover {
+        background-color: #c0392b; 
+    }
+
+  </style>
 </head>
 <body>
-    
-    <div class="table-container">
 
-        <table>
-            
-                <h1 class="data-cell-center">
-                    <span id="club-name-to-animate">DYNAMIX BADMINTON SPORTS CLUB</span>
-                    <br>
-                    লেনদেন
-                </h1>
-            </caption>
-                
-            <thead>
-                <tr class="data-cell-center">
-                    <th rowspan="2">ক্র:নং</th>
-                    <th rowspan="2">তারিখ</th>
-                    <th rowspan="2">বিবরণ</th>
-                    <th colspan="8">নাম</th>
-                    <th rowspan="2">অনুদান</th>
-                    <th rowspan="3">মোট</th>
-                </tr>
-                <tr class="data-cell-center">
-                    <th>কায়েস</th><th>উৎস</th><th>আরাফাত</th><th>জয়</th><th>রোহিত</th>
-                    <th>হাবিব</th><th>খবির</th><th>অন্যান্য</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="data-cell-center">
-                    <td rowspan="4">১</td>
-                    <td rowspan="4">৭/১১/২৫</td>
-                    <td class="data-cell-center" style="font-weight: 700;color: #16a085;">জমা </td>
-                    <td>২০</td><td>২০</td><td>২০</td><td>২০</td><td>২০</td>
-                    <td>২০</td><td>০</td><td>২০</td>
-                    <td rowspan="1" style="vertical-align: top;">০</td>
-                    <td rowspan ="3" style="vertical-align:top; font-weight: 600;">১৪০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
-                </tr>
-                <tr class="data-cell-center">
-                    <td class="data-cell-center" style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
-                    <td colspan="9"></td> 
-                     
-                </tr>
-                        <tr>
-                           <td class="data-cell-center" style="font-weight: 700;color: #16a085;">উৎস ও আরাফাতের পাওনা টাকা</td>
-                    <td colspan="9"></td>          
-                                               
-                        </tr>
-                <tr class="data-cell-center">
-                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
-                    <td colspan="9"></td>
-                    <td style="font-weight: 700;">২৫</td>
-                    
-                </tr>
+  <div class="zoom-buttons">
+    <button class="zoom-btn" id="zoom-in">Zoom In</button>
+    <button class="zoom-btn" id="zoom-out">Zoom Out</button>
+    <button class="zoom-btn" id="zoom-reset">Reset</button>
+  </div>
 
-                <tr class="accordion-row-header" id="toggle-row-2">
-                    <td colspan="13">
-                        <span class="accordion-icon-container">
-                            <div class="icon-symbol">&#9660;</div>
-                        </span>
-                    </td>
-                </tr>
-                
-                
-                
-                <tr id="row-2-content" class="data-cell-center">
-                    <td rowspan="3">২</td> <td rowspan="3">০৮/১১/২৫</td> <td style="font-weight: 600;color: #16a085;">জমা</td>
-                    <td>২০</td><td>২০</td><td>২০</td><td></td><td>২০</td>
-                    <td></td><td></td><td></td>
-                    <td></td>
-                    <td style="font-weight: 600;">৮০</td>
-                </tr>
-                
-                <tr id="row-2-bill" class="data-cell-center">
-                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
-                    <td colspan="9"></td> <td style="font-weight: 700;">(২৫)</td>
-                </tr>
+  <div class="table-wrapper">
+    <div class="table-container" id="zoom-table">
+      <table>
+        <caption>
+          <h1 class="data-cell-center">
+            <span id="club-name-to-animate">DYNAMIX BADMINTON SPORTS CLUB</span>
+            <br>লেনদেন
+          </h1>
+        </caption>
+        <thead>
+          <tr class="data-cell-center">
+            <th rowspan="2">ক্র:নং</th>
+            <th rowspan="2">তারিখ</th>
+            <th rowspan="2">বিবরণ</th>
+            <th colspan="8">নাম</th>
+            <th rowspan="2">অনুদান</th>
+            <th rowspan="3">মোট</th>
+          </tr>
+          <tr class="data-cell-center">
+            <th>কায়েস</th><th>উৎস</th><th>আরাফাত</th><th>জয়</th><th>রোহিত</th>
+            <th>হাবিব</th><th>খবির</th><th>অন্যান্য</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-cell-center">
+            <td rowspan="4">১</td>
+            <td rowspan="4">৭/১১/২৫</td>
+            <td class="data-cell-center" style="font-weight:700;color:#16a085;">জমা</td>
+            <td>২০</td><td>২০</td><td>২০</td><td>২০</td><td>২০</td>
+            <td>২০</td><td>০</td><td>২০</td>
+            <td rowspan="1" style="vertical-align: top;">০</td>
+            <td rowspan ="3" style="vertical-align:top; font-weight:600;">১৪০<br><br><br>(৩৫)<br><br><br>(৮০)</td>
+          </tr>
+          <tr class="data-cell-center">
+            <td style="font-weight:700;color:#16a085;">কারেন্ট বিল প্রদান</td>
+            <td colspan="9"></td>
+          </tr>
+          <tr class="data-cell-center">
+            <td style="font-weight:700;color:#16a085;">উৎস ও আরাফাতের পাওনা টাকা</td>
+            <td colspan="9"></td>
+          </tr>
+          <tr class="data-cell-center">
+            <td style="font-weight:700;color:#16a085;">অবশিষ্ট</td>
+            <td colspan="9"></td>
+            <td style="font-weight:700;">২৫</td>
+          </tr>
 
-                <tr id="row-2-remaining" class="data-cell-center">
-                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
-                    <td colspan="9"></td> <td style="font-weight: 900;">৫৫+২৫<br>=৮০</td>
-                </tr>
-                
-                
-           
-                
-                <tr class="accordion-row-header" id="toggle-row-3">
-                    <td colspan="13">
-                        <span class="accordion-icon-container">
-                            <div class="icon-symbol">&#9660;</div>
-                        </span>
-                    </td>
-                </tr>
-                
-                        
-                        
-                <tr id="row-3-content" class="data-cell-center">
-                    <td rowspan="3">৩</td>
-                    <td rowspan="3">১০/১১/২৫</td>
-                    <td style="font-weight: 600;color: #16a085;">জমা</td>
-                    <td>২০</td>
-                    <td>২০</td>
-                    <td>২০</td>
-                    <td>২০</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    
-                    <td style="font-weight: 600;">৮০</td>
-                </tr>
-                
-                        
-                        <tr id="row-3-bill" class="data-cell-center">
-                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
-                    <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
-                </tr>
+          <tr class="accordion-row-header" id="toggle-row-2">
+            <td colspan="13">
+              <span class="accordion-icon-container">
+                <div class="icon-symbol">&#9660;</div>
+              </span>
+            </td>
+          </tr>
+          
+          <tr id="row-2-content" class="data-cell-center">
+            <td rowspan="3">২</td> <td rowspan="3">০৮/১১/২৫</td> <td style="font-weight:600;color:#16a085;">জমা</td>
+            <td>২০</td><td>২০</td><td>২০</td><td></td><td>২০</td>
+            <td></td><td></td><td></td>
+            <td></td>
+            <td style="font-weight:600;">৮০</td>
+          </tr>
+          <tr id="row-2-bill" class="data-cell-center">
+            <td style="font-weight:700;color:#16a085;">কারেন্ট বিল প্রদান</td>
+            <td colspan="9"></td> <td style="font-weight:700;">(২৫)</td>
+          </tr>
+          <tr id="row-2-remaining" class="data-cell-center">
+            <td style="font-weight:700;color:#16a085;">অবশিষ্ট</td>
+            <td colspan="9"></td> <td style="font-weight:900;">৫৫+২৫<br>=৮০</td>
+          </tr>
 
-                <tr id="row-3-remaining" class="data-cell-center">
-                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
-                    <td colspan="9"></td> <td style="font-weight: 900;">৮০+৮০<br>=১৬০</td>
-                </tr>
+          <tr class="accordion-row-header" id="toggle-row-3">
+              <td colspan="13">
+                  <span class="accordion-icon-container">
+                      <div class="icon-symbol">&#9660;</div>
+                  </span>
+              </td>
+          </tr>
+                
+          <tr id="row-3-content" class="data-cell-center">
+              <td rowspan="3">৩</td>
+              <td rowspan="3">১০/১১/২৫</td>
+              <td style="font-weight: 600;color: #16a085;">জমা</td>
+              <td>২০</td>
+              <td>২০</td>
+              <td>২০</td>
+              <td>২০</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              
+              <td style="font-weight: 600;">৮০</td>
+          </tr>
+          <tr id="row-3-bill" class="data-cell-center">
+              <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
+              <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
+          </tr>
+          <tr id="row-3-remaining" class="data-cell-center">
+              <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
+              <td colspan="9"></td> <td style="font-weight: 900;">৮০+৮০<br>=১৬০</td>
+          </tr>
                         
-                        
-                
-                <tr class="accordion-row-header" id="toggle-row-4">
-                    <td colspan="13">
-                        <span class="accordion-icon-container">
-                            <div class="icon-symbol">&#9660;</div>
-                        </span>
-                    </td>
-                </tr>
-                
-                <tr id="row-4-deposit" class="data-cell-center">
-                    <td rowspan="3">৪</td> <td rowspan="3">১১/১১/২৫</td> <td style="font-weight: 600;color: #16a085;">জমা</td>
-                    <td></td><td></td><td></td><td></td><td></td>
-                    <td></td><td></td><td></td>
-                    <td></td>
-                    <td style="font-weight: 600;">০</td>
-                </tr>
-                
-                <tr id="row-4-bill" class="data-cell-center">
-                    <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
-                    <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
-                </tr>
+          <tr class="accordion-row-header" id="toggle-row-4">
+              <td colspan="13">
+                  <span class="accordion-icon-container">
+                      <div class="icon-symbol">&#9660;</div>
+                  </span>
+              </td>
+          </tr>
+          
+          <tr id="row-4-deposit" class="data-cell-center">
+              <td rowspan="3">৪</td> <td rowspan="3">১১/১১/২৫</td> <td style="font-weight: 600;color: #16a085;">জমা</td>
+              <td></td><td></td><td></td><td></td><td></td>
+              <td></td><td></td><td></td>
+              <td></td>
+              <td style="font-weight: 600;">০</td>
+          </tr>
+          <tr id="row-4-bill" class="data-cell-center">
+              <td style="font-weight: 700;color: #16a085;">কারেন্ট বিল প্রদান</td>
+              <td colspan="9"></td> <td style="font-weight: 700;">(০)</td>
+          </tr>
+          <tr id="row-4-remaining" class="data-cell-center">
+              <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
+              <td colspan="9"></td> <td style="font-weight: 900;">০</td> 
+          </tr>
 
-                <tr id="row-4-remaining" class="data-cell-center">
-                    <td style="font-weight: 700; color: #16a085;">অবশিষ্ট</td>
-                    <td colspan="9"></td> <td style="font-weight: 900;">০</td> 
-                </tr>
-                </tbody>
-        </table>
-    </div> 
-    
-    <div class="creator-credit">
-        Created by Kayes Ahmmed
+        </tbody>
+      </table>
     </div>
-    <script>
-   
+  </div>
+
+  <div class="creator-credit" id="creator-credit">Created by Kayes Ahmmed</div>
+
+  <script>
+    // ✅ কালার পরিবর্তন ফাংশন (আগে ক্লাব নামের জন্য ব্যবহৃত)
     function getRandomColor() {
-        var h = Math.floor(Math.random() * 360); 
-        return 'hsl(' + h + ', 90%, 55%)';
+      var h = Math.floor(Math.random() * 360);
+      // রঙগুলো উজ্জ্বল ও স্পষ্টভাবে পরিবর্তনশীল
+      return 'hsl(' + h + ', 95%, 60%)'; 
     }
-    function applyAnimationToText(elementId) {
-        const targetElement = document.getElementById(elementId);
-        if (!targetElement) return;
-
-        let fullText = targetElement.textContent.trim();
-        targetElement.innerHTML = '';
-        
-        const charSpans = [];
-
-        for (const char of fullText) {
-            const span = document.createElement('span');
-            span.textContent = char === ' ' ? '\u00A0' : char;
-            targetElement.appendChild(span);
-            charSpans.push(span);
-        }
-
-        setInterval(() => {
-            charSpans.forEach((span) => {
-                span.style.color = getRandomColor();
-            });
+    
+    // ✅ টেক্সট অ্যানিমেশনের জন্য প্রস্তুত করা ও শুরু করা
+    function applyAnimationToText(elementId, animateColor = true) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.textContent.trim();
+      el.innerHTML = '';
+      const spans = [];
+      for (const c of text) {
+        const s = document.createElement('span');
+        s.textContent = c === ' ' ? '\u00A0' : c;
+        el.appendChild(s);
+        spans.push(s);
+      }
+      
+      if (animateColor) {
+        // রঙ পরিবর্তনের লুপ শুরু
+        el.colorInterval = setInterval(() => {
+          spans.forEach(sp => sp.style.color = getRandomColor());
         }, 450);
+      }
+      
+      return spans;
     }
     
-   
-    
+    // ✅ পূর্বের অ্যানিমেশন লুপ বন্ধ করার ফাংশন
+    function stopAnimation(elementId) {
+        const el = document.getElementById(elementId);
+        if (el && el.colorInterval) {
+            clearInterval(el.colorInterval);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-        applyAnimationToText('club-name-to-animate'); 
+      // ক্লাব নামের জন্য অ্যানিমেশন শুরু
+      applyAnimationToText('club-name-to-animate');
+
+      const zoomWrapper = document.getElementById('zoom-table');
+      const creditElement = document.getElementById('creator-credit'); 
+      let zoomLevel = 1.0; 
+      const zoomStep = 0.1;
+      const minZoom = 0.6;
+      const maxZoom = 2.0;
+      let creditSpans = []; // ক্রেডিটের স্প্যানগুলো সংরক্ষণের জন্য
+
+      function updateZoom(newZoomLevel) {
+        zoomLevel = newZoomLevel;
+        zoomWrapper.style.transform = `scale(${zoomLevel})`;
+
+        if (zoomLevel > 1.0) {
+          // জুম ইন হলে fixed-credit ক্লাস যোগ করা হবে
+          creditElement.classList.add('fixed-credit');
+          
+          // যদি স্প্যান তৈরি না হয়ে থাকে, তবে তৈরি করে অ্যানিমেশন শুরু করুন
+          if (creditSpans.length === 0) {
+              creditSpans = applyAnimationToText('creator-credit', true);
+          }
+        } else {
+          // জুম 1.0 বা তার কম হলে ক্লাসটি সরিয়ে স্বাভাবিক অবস্থানে নেওয়া হবে
+          creditElement.classList.remove('fixed-credit');
+          
+          // অ্যানিমেশন বন্ধ করে ডিফল্ট স্টাইলে ফিরিয়ে নিন
+          if (creditSpans.length > 0) {
+              stopAnimation('creator-credit');
+              // ডিফল্ট কালারে ফিরিয়ে আনা
+              creditSpans.forEach(sp => sp.style.color = ''); 
+              creditElement.innerHTML = 'Created by Kayes Ahmmed'; // DOM কে পরিষ্কার করা
+              creditSpans = [];
+          }
+        }
+      }
+
+      document.getElementById('zoom-in').addEventListener('click', () => {
+        let newLevel = zoomLevel + zoomStep;
+        if (newLevel > maxZoom) newLevel = maxZoom;
+        updateZoom(newLevel);
+      });
+
+      document.getElementById('zoom-out').addEventListener('click', () => {
+        let newLevel = zoomLevel - zoomStep;
+        if (newLevel < minZoom) newLevel = minZoom;
+        updateZoom(newLevel);
+      });
+      
+      // রিসেট বাটন
+      document.getElementById('zoom-reset').addEventListener('click', () => {
+        zoomLevel = 1.0; 
+        zoomWrapper.style.transform = ''; 
+        creditElement.classList.remove('fixed-credit');
         
-        // অ্যাকর্ডিয়ন গ্রুপগুলো ডিফাইন করা হলো: [টগল রো ID, [কনটেন্ট রো ID-গুলো] ]
-        const accordionGroups = [
-            // ২ নম্বর আইটেম
-            ['toggle-row-2', ['row-2-content', 'row-2-bill', 'row-2-remaining']], 
-            // ৩ নম্বর আইটেম
-            ['toggle-row-3', ['row-3-content', 'row-3-bill', 'row-3-remaining']], 
-            // ৪ নম্বর আইটেমটিকে নতুন ৩টি সারির গ্রুপ বানানো হলো
-            ['toggle-row-4', ['row-4-deposit', 'row-4-bill', 'row-4-remaining']] 
-        ];
+        // অ্যানিমেশন বন্ধ করে ডিফল্ট স্টাইলে ফিরিয়ে নিন
+        if (creditSpans.length > 0) {
+            stopAnimation('creator-credit');
+            creditSpans.forEach(sp => sp.style.color = ''); 
+            creditElement.innerHTML = 'Created by Kayes Ahmmed';
+            creditSpans = [];
+        }
+      });
 
-        accordionGroups.forEach(group => {
-            const toggleRow = document.getElementById(group[0]);
-            const contentRowIds = group[1]; // contentRowIds এখন একটি অ্যারে
+      // অ্যাকর্ডিয়ন ফাংশনালিটি (অপরিবর্তিত)
+      const accordionGroups = [
+          ['toggle-row-2', ['row-2-content', 'row-2-bill', 'row-2-remaining']], 
+          ['toggle-row-3', ['row-3-content', 'row-3-bill', 'row-3-remaining']], 
+          ['toggle-row-4', ['row-4-deposit', 'row-4-bill', 'row-4-remaining']] 
+      ];
 
-            if (toggleRow && contentRowIds.length > 0) {
-                toggleRow.addEventListener('click', function() {
-                    
-                   
-                    this.classList.add('spinning');
-                    setTimeout(() => {
-                        this.classList.remove('spinning');
-                    }, 600);
-                 
-                    this.classList.toggle('active');
-                    
-                    // গ্রুপের ভেতরের প্রতিটি ID ধরে টগল করা হচ্ছে
+      accordionGroups.forEach(group => {
+          const toggleRow = document.getElementById(group[0]);
+          const contentRowIds = group[1];
 
-                    contentRowIds.forEach(rowId => {
-                        const contentRow = document.getElementById(rowId);
-                        if (contentRow) {
-                            contentRow.classList.toggle('active');
-                        }
-                    });
-                });
-            }
-        });
+          if (toggleRow && contentRowIds.length > 0) {
+              toggleRow.addEventListener('click', function() {
+                  
+                  this.classList.add('spinning');
+                  setTimeout(() => {
+                      this.classList.remove('spinning');
+                  }, 600);
+                  
+                  this.classList.toggle('active');
+                  
+                  contentRowIds.forEach(rowId => {
+                      const contentRow = document.getElementById(rowId);
+                      if (contentRow) {
+                          contentRow.classList.toggle('active');
+                      }
+                  });
+              });
+          }
+      });
     });
-</script>
-
+  </script>
 </body>
-                            </html>
+    </html>
